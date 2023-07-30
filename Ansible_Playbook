@@ -1,1 +1,19 @@
+---
+- name: Install and configure Nginx web server
+  hosts: webservers
+  become: true
+  gather_facts: yes
 
+  tasks:
+  - name: Display OS information
+    debug:
+      var: ansible_distribution
+  
+  - name: Update apt cache
+    apt:
+      update_cache: yes
+
+  - name: Install Nginx web server
+    apt:
+      name: nginx
+      state: latest
